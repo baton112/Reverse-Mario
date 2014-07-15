@@ -1,27 +1,44 @@
 package com.mygdx.game.mario.revrse;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.mario.revrse.assets.Assets;
+import com.mygdx.game.mario.revrse.screens.GameScreen;
+import com.mygdx.game.mario.revrse.screens.MainMenuScreen;
 
-public class MyGdxGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+public class MyGdxGame extends Game {
+	
+	private static float screenHeight;
+	public float screenWidth;
+	
 	
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	public void create() {
+		Assets.load();
+		
+		screenWidth = Gdx.graphics.getWidth();
+		setScreenHeight(Gdx.graphics.getHeight());
+		
+		//setScreen(new MainMenuScreen(this));
+		setScreen(new GameScreen(this));
+	}
+	
+	public void startGame() {
+
+		this.getScreen().dispose();
+		setScreen(new GameScreen(this));
+		
 	}
 
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	public static float getScreenHeight() {
+		return screenHeight;
 	}
+	
+
+	public static void setScreenHeight(float screenHeight) {
+		MyGdxGame.screenHeight = screenHeight;
+	}
+	
+	
+	
 }
