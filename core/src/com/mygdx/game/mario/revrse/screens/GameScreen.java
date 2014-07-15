@@ -28,7 +28,7 @@ public class GameScreen extends MyScreen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		Assets.batch.begin();
+		
 		//rysowanie wszystkiego 
 		if(Gdx.input.isTouched())
 		{
@@ -38,8 +38,9 @@ public class GameScreen extends MyScreen {
 			myShapeRenderer.setColor(Color.YELLOW);
 			myShapeRenderer.circle(x, y, 50);
 			myShapeRenderer.end();
+			player.move(delta);
 		}
-		
+		Assets.batch.begin();
 		player.drow();
 		
 		Assets.batch.end();

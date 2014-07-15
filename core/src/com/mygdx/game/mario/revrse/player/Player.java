@@ -13,9 +13,10 @@ public class Player {
 	private boolean jump; // true jesli jest w podskoku
 	private boolean left;
 	
-	private static int spriteWidthSmall = 15;
-	private static int spriteHeightSmall = 15;
-	private static int center = 180;
+	private final static int spriteWidthSmall = 15;
+	private final static int spriteHeightSmall = 15;
+	private final static int center = 180;
+	private final static int maxSpeed = 10;
 			
 	public Player()
 	{
@@ -43,13 +44,24 @@ public class Player {
 	{
 		if(health >=2 ) health +=2;
 		else die();
-		
 	}
-	
+
 	public void die()
 	{
 		//TO DO 
 		//umieranie
+	}
+	
+	public void move(float delta)
+	{
+		if(left)
+		{
+			position.x -= maxSpeed*delta;
+		}
+		else 
+		{
+			position.x += maxSpeed*delta;
+		}
 	}
 
 }
