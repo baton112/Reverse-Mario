@@ -9,14 +9,14 @@ import com.mygdx.game.mario.revrse.screens.MainMenuScreen;
 public class MyGdxGame extends Game {
 	
 	private static float screenHeight;
-	public float screenWidth;
+	private static float screenWidth;
 	
 	
 	@Override
 	public void create() {
 		Assets.load();
 		
-		screenWidth = Gdx.graphics.getWidth();
+		setScreenWidth(Gdx.graphics.getWidth());
 		setScreenHeight(Gdx.graphics.getHeight());
 		
 		//setScreen(new MainMenuScreen(this));
@@ -37,6 +37,14 @@ public class MyGdxGame extends Game {
 
 	public static void setScreenHeight(float screenHeight) {
 		MyGdxGame.screenHeight = screenHeight;
+	}
+
+	public float getScreenWidth() {
+		return screenWidth;
+	}
+
+	public void setScreenWidth(float screenWidth) {
+		MyGdxGame.screenWidth = screenWidth;
 	}
 	
 	

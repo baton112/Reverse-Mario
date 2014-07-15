@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.mygdx.game.mario.revrse.MyGdxGame;
 import com.mygdx.game.mario.revrse.assets.Assets;
+import com.mygdx.game.mario.revrse.player.Player;
 
 
 
@@ -14,11 +15,13 @@ public class GameScreen extends MyScreen {
 	
 	private ShapeRenderer myShapeRenderer;	
 	private int x, y;
+	private Player player;
 
 	public GameScreen(MyGdxGame myGdxGame) {
 		this.game = myGdxGame;
 		// TODO Auto-generated constructor stub
 		myShapeRenderer = new ShapeRenderer();
+		player = new Player();
 	}
 	
 	@Override
@@ -37,6 +40,7 @@ public class GameScreen extends MyScreen {
 			myShapeRenderer.end();
 		}
 		
+		player.drow();
 		
 		Assets.batch.end();
 	}
