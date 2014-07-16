@@ -10,7 +10,8 @@ public class MyGdxGame extends Game {
 	
 	private static float screenHeight;
 	private static float screenWidth;
-	
+	private static float resolutionScaleX;
+	private static float resolutionScaleY;
 	
 	@Override
 	public void create() {
