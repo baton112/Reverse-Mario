@@ -2,9 +2,11 @@ package com.mygdx.game.mario.revrse.player;
 
 import javax.swing.text.StyledEditorKit.BoldAction;
 
+
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.mario.revrse.MyGdxGame;
 import com.mygdx.game.mario.revrse.assets.Assets;
 import com.mygdx.game.mario.revrse.contorls.GameButtons;
 
@@ -33,7 +35,8 @@ public class Player {
 		TextureRegion sprite = new TextureRegion(Assets.playerTexture,center,0 ,spriteWidthSmall, spriteHeightSmall );
 		
 		//rysowanie mario na jego pozycji 
-		Assets.batch.draw(sprite,position.x, position.y, spriteWidthSmall*4, spriteHeightSmall*4);
+		Assets.batch.draw(sprite,position.x, position.y, 
+				spriteWidthSmall*4*MyGdxGame.resolutionScaleX, spriteHeightSmall*4*MyGdxGame.resolutionScaleY);
 	}
 	
 	public void bonusHealth()

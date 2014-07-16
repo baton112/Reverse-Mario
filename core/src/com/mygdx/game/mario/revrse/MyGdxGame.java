@@ -10,8 +10,8 @@ public class MyGdxGame extends Game {
 	
 	private static float screenHeight;
 	private static float screenWidth;
-	private static float resolutionScaleX;
-	private static float resolutionScaleY;
+	public static float resolutionScaleX;
+	public static float resolutionScaleY;
 	
 	@Override
 	public void create() {
@@ -20,6 +20,8 @@ public class MyGdxGame extends Game {
 		setScreenWidth(Gdx.graphics.getWidth());
 		setScreenHeight(Gdx.graphics.getHeight());
 		
+		resolutionScaleX = getScreenWidth() / 1280;
+		resolutionScaleY = getScreenHeight() / 720;
 		//setScreen(new MainMenuScreen(this));
 		setScreen(new GameScreen(this));
 	}

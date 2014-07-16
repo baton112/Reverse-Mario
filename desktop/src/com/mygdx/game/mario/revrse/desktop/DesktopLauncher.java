@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new MyGdxGame(), config);
 		config.title = "Reverse Mario";
-		config.width = 1280;
-		config.height = 720;
+		config.width = 1024;
+		config.height = 600;
 	}
 }

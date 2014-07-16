@@ -12,11 +12,11 @@ public class GameButtons {
 	public static void draw()
 	{
 		TextureRegion sprite = new TextureRegion(Assets.arrows,0,0 ,buttonSize, buttonSize );
-		Assets.batch.draw(sprite, 0, 0);
+		Assets.batch.draw(sprite, 0, 0, buttonSize*MyGdxGame.resolutionScaleX, buttonSize*MyGdxGame.resolutionScaleY);
 		sprite = new TextureRegion(Assets.arrows,buttonSize, 0 ,buttonSize, buttonSize );
-		Assets.batch.draw(sprite, buttonSize, 0);
-
-		
+		Assets.batch.draw(sprite, buttonSize*MyGdxGame.resolutionScaleX, 0, 
+				buttonSize*MyGdxGame.resolutionScaleX, buttonSize*MyGdxGame.resolutionScaleY);
+	
 	}
 	
 	public static boolean isTouched()
@@ -34,17 +34,17 @@ public class GameButtons {
 			      
 			      if(left)
 			      {
-						if(iX > 0 && iX < buttonSize 
+						if(iX > 0 && iX < buttonSize*MyGdxGame.resolutionScaleX
 								&& iY < MyGdxGame.getScreenHeight() 
-								&& iY > MyGdxGame.getScreenHeight()-buttonSize )
+								&& iY > MyGdxGame.getScreenHeight()-buttonSize*MyGdxGame.resolutionScaleY )
 						{
 							return true;
 						}
 			      }else 
 			      {
-			    	  if(iX > buttonSize  && iX < 2*buttonSize 
+			    	  if(iX > buttonSize*MyGdxGame.resolutionScaleX && iX < 2*buttonSize*MyGdxGame.resolutionScaleX
 								&& iY < MyGdxGame.getScreenHeight() 
-								&& iY > MyGdxGame.getScreenHeight()-buttonSize )
+								&& iY > MyGdxGame.getScreenHeight()-buttonSize*MyGdxGame.resolutionScaleY )
 						{
 							return true;
 						}
