@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.mario.revrse.assets.Assets;
+import com.mygdx.game.mario.revrse.contorls.GameButtons;
 
 public class Player {
 	private Vector2 position; // lewy dolny rog jego pozycji 
@@ -16,7 +17,7 @@ public class Player {
 	private final static int spriteWidthSmall = 15;
 	private final static int spriteHeightSmall = 15;
 	private final static int center = 180;
-	private final static int maxSpeed = 10;
+	private final static int maxSpeed = 100;
 			
 	public Player()
 	{
@@ -54,6 +55,8 @@ public class Player {
 	
 	public void move(float delta)
 	{
+		if(GameButtons.isTouched(true)) left = true;
+		if(GameButtons.isTouched(false)) left = false;
 		if(left)
 		{
 			position.x -= maxSpeed*delta;
@@ -63,5 +66,8 @@ public class Player {
 			position.x += maxSpeed*delta;
 		}
 	}
+	
+
+	
 
 }

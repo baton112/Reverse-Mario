@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.mygdx.game.mario.revrse.MyGdxGame;
 import com.mygdx.game.mario.revrse.assets.Assets;
+import com.mygdx.game.mario.revrse.contorls.GameButtons;
 import com.mygdx.game.mario.revrse.player.Player;
 
 
@@ -38,10 +39,15 @@ public class GameScreen extends MyScreen {
 			myShapeRenderer.setColor(Color.YELLOW);
 			myShapeRenderer.circle(x, y, 50);
 			myShapeRenderer.end();
+			
+		}
+		if(GameButtons.isTouched())
+		{
 			player.move(delta);
 		}
 		Assets.batch.begin();
 		player.drow();
+		GameButtons.draw();
 		
 		Assets.batch.end();
 	}
