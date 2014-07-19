@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.mygdx.game.mario.revrse.assets.Assets;
 import com.mygdx.game.mario.revrse.screens.GameScreen;
 import com.mygdx.game.mario.revrse.screens.MainMenuScreen;
+import com.mygdx.game.mario.revrse.sounds.Sounds;
 
 public class MyGdxGame extends Game {
 	
@@ -16,6 +17,7 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create() {
 		Assets.load();
+		Sounds.load();
 		
 		setScreenWidth(Gdx.graphics.getWidth());
 		setScreenHeight(Gdx.graphics.getHeight());
