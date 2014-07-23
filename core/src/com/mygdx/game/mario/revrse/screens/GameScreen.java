@@ -14,8 +14,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.mario.revrse.MyGdxGame;
 import com.mygdx.game.mario.revrse.assets.Assets;
@@ -50,28 +48,9 @@ public class GameScreen extends MyScreen {
 		
 		
 		myShapeRenderer = new ShapeRenderer(); // takie gowno tylko na chwile 
-		player = new Player();
-		
-		//kwadrat 
-		//definicja ciala 
-		BodyDef playerDef = new BodyDef();
-		playerDef.type = BodyType.DynamicBody;
-		playerDef.position.set(0,10);
+		player = new Player(world);
 		
 		
-		PolygonShape kwadrat = new PolygonShape();
-		kwadrat.setAsBox(1, 1); /// polowa wielkosci 
-		
-		//fixture deinition 
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = kwadrat;
-		fixtureDef.density = 10;
-		fixtureDef.friction = 0.1f;
-		fixtureDef.restitution = 0;//odbijanie 
-		
-		world.createBody(playerDef).createFixture(fixtureDef);
-		
-		kwadrat.dispose();
 		
 		//GROUND 
 		//body def 
@@ -99,10 +78,8 @@ public class GameScreen extends MyScreen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		debugRenderer.render(world, camera.combined);
-		
-		//rysowanie wszystkiego 
+				
+		//przyciski
 		if(Gdx.input.isTouched())
 		{
 			x = Gdx.input.getX();
@@ -117,15 +94,23 @@ public class GameScreen extends MyScreen {
 		{
 			player.move(delta);
 		}
+		
+		//update swiata 
+		world.step(delta, velocityIterations, positionIterations);
+		//update kamery 
+		camera.position.set(player.getPosition().x, player.getPosition().y , 0);
+		camera.update();
+		
+		//rysowanie 
 		Assets.batch.begin();
-		player.drow();
+		player.drow(world);
 		GameButtons.draw();
 		
 		Assets.batch.end();
 		
 		
+		debugRenderer.render(world, camera.combined);
 		
-		world.step(delta, velocityIterations, positionIterations);
 	}
 
 	@Override 
