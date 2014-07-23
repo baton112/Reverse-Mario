@@ -46,12 +46,8 @@ public class GameScreen extends MyScreen {
 		world = new World(gravity, true);
 		debugRenderer = new Box2DDebugRenderer();
 		
-		
-		myShapeRenderer = new ShapeRenderer(); // takie gowno tylko na chwile 
 		player = new Player(world);
-		
-		
-		
+
 		//GROUND 
 		//body def 
 		BodyDef groundDef = new BodyDef();
@@ -84,10 +80,6 @@ public class GameScreen extends MyScreen {
 		{
 			x = Gdx.input.getX();
 			y = (int) (MyGdxGame.getScreenHeight() - Gdx.input.getY());
-			myShapeRenderer.begin(ShapeType.Filled);
-			myShapeRenderer.setColor(Color.YELLOW);
-			myShapeRenderer.circle(x, y, 50);
-			myShapeRenderer.end();
 			
 		}
 		if(GameButtons.isTouched())
@@ -102,6 +94,7 @@ public class GameScreen extends MyScreen {
 		camera.update();
 		
 		//rysowanie 
+		Assets.batch.setProjectionMatrix(camera.combined);
 		Assets.batch.begin();
 		player.drow();
 		GameButtons.draw();

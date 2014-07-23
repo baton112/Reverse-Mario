@@ -1,6 +1,9 @@
 package com.mygdx.game.mario.revrse.player;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -8,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.mario.revrse.MyGdxGame;
+import com.mygdx.game.mario.revrse.assets.Assets;
 import com.mygdx.game.mario.revrse.contorls.GameButtons;
 
 public class Player {
@@ -23,6 +28,7 @@ public class Player {
 	private final static int spriteHeightSmall = 15;
 	private final static int center = 180;
 	private final static int maxSpeed = 100;
+	private static float width = 1, height = 1;
 			
 	public Player(World world)
 	{
@@ -39,7 +45,7 @@ public class Player {
 		
 		//definicja ksztaltu i wielkosci
 		PolygonShape squareShape = new PolygonShape();
-		squareShape.setAsBox(1, 1); /// polowa wielkosci 
+		squareShape.setAsBox(width/2, height/2); /// polowa wielkosci 
 		
 		//fixture deinition 
 		FixtureDef fixtureDef = new FixtureDef();
@@ -50,6 +56,11 @@ public class Player {
 		
 		playerBody = world.createBody(playerDef);
 		playerBody.createFixture(fixtureDef);
+		
+		TextureRegion sprite = new TextureRegion(Assets.playerTexture,center,0 ,spriteWidthSmall, spriteHeightSmall );
+		Sprite tmpSprite = new Sprite(sprite);
+		tmpSprite.setSize(width, height);
+		playerBody.setUserData(tmpSprite);
 		
 		
 		squareShape.dispose();
@@ -62,8 +73,19 @@ public class Player {
 		//TextureRegion sprite = new TextureRegion(Assets.playerTexture,center,0 ,spriteWidthSmall, spriteHeightSmall );
 		
 		//rysowanie mario na jego pozycji 
-		//Assets.batch.draw(sprite,position.x, position.y, 
-			//	spriteWidthSmall*4*MyGdxGame.resolutionScaleX, spriteHeightSmall*4*MyGdxGame.resolutionScaleY);
+		//Assets.batch.draw(sprite,playerBody.getPosition().x, playerBody.getPosition().y, 
+		//		spriteWidthSmall*4*MyGdxGame.resolutionScaleX, spriteHeightSmall*4*MyGdxGame.resolutionScaleY);
+		
+		if(playerBody.getUserData() instanceof Sprite)
+		{
+			Sprite sprite = (Sprite) playerBody.getUserData();
+			sprite.setPosition(playerBody.getPosition().x - sprite.getWidth()/2, playerBody.getPosition().y - sprite.getHeight()/2 );
+			sprite.setRotation(playerBody.getAngle() * MathUtils.radiansToDegrees); // ustawiam angle bo czemu nie :D 
+			sprite.setSize(width, height);
+			sprite.setOrigin(sprite.getWidth()/2 , sprite.getHeight()/2);
+			sprite.draw(Assets.batch);
+			//Gdx.app.log("player rys", "narysowano mario");
+		}
 		
 	}
 	
@@ -103,7 +125,7 @@ public class Player {
 	
 	public Vector2 getPosition()
 	{
-		Gdx.app.log("poz", playerBody.getPosition().toString());
+		//Gdx.app.log("poz", playerBody.getPosition().toString());
 		return playerBody.getPosition();
 		
 	}

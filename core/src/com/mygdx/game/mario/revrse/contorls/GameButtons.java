@@ -12,10 +12,10 @@ public class GameButtons {
 	public static void draw()
 	{
 		TextureRegion sprite = new TextureRegion(Assets.arrows,0,0 ,buttonSize, buttonSize );
-		Assets.batch.draw(sprite, 0, 0, buttonSize*MyGdxGame.resolutionScaleX, buttonSize*MyGdxGame.resolutionScaleY);
+		//Assets.batch.draw(sprite, 0, 0, buttonSize*MyGdxGame.resolutionScaleX, buttonSize*MyGdxGame.resolutionScaleY);
 		sprite = new TextureRegion(Assets.arrows,buttonSize, 0 ,buttonSize, buttonSize );
-		Assets.batch.draw(sprite, buttonSize*MyGdxGame.resolutionScaleX, 0, 
-				buttonSize*MyGdxGame.resolutionScaleX, buttonSize*MyGdxGame.resolutionScaleY);
+		//Assets.batch.draw(sprite, buttonSize*MyGdxGame.resolutionScaleX, 0, 
+		//		buttonSize*MyGdxGame.resolutionScaleX, buttonSize*MyGdxGame.resolutionScaleY);
 	
 	}
 	
