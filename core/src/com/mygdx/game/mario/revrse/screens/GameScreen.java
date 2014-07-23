@@ -103,7 +103,7 @@ public class GameScreen extends MyScreen {
 		
 		//rysowanie 
 		Assets.batch.begin();
-		player.drow(world);
+		player.drow();
 		GameButtons.draw();
 		
 		Assets.batch.end();

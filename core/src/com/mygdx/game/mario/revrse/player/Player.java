@@ -44,7 +44,7 @@ public class Player {
 		//fixture deinition 
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = squareShape;
-		fixtureDef.density = 10;
+		fixtureDef.density = 0; // wplywa na sile potrzebna do podskakiwania 
 		fixtureDef.friction = 0.1f;
 		fixtureDef.restitution = 0;//odbijanie
 		
@@ -55,7 +55,7 @@ public class Player {
 		squareShape.dispose();
 	}
 	
-	public void drow(World world)
+	public void drow()
 	{
 	
 		//wybor tekstury z png z teksturami 
@@ -92,9 +92,11 @@ public class Player {
 		if(left)
 		{
 			//position.x -= maxSpeed*delta;
+			playerBody.applyForceToCenter(0, 100, true);
 		}
 		else 
 		{
+			playerBody.applyForceToCenter(0, -100, true);
 			//position.x += maxSpeed*delta;
 		}
 	}
