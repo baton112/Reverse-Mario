@@ -1,13 +1,10 @@
 package com.mygdx.game.mario.revrse.screens;
 
-import java.awt.event.FocusEvent;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -24,7 +21,6 @@ import com.mygdx.game.mario.revrse.player.Player;
 
 public class GameScreen extends MyScreen {
 	
-	private ShapeRenderer myShapeRenderer;	
 	private int x, y;
 	private Player player;
 	private final Vector2 gravity;

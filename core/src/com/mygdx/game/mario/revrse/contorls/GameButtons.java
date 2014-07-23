@@ -1,6 +1,8 @@
 package com.mygdx.game.mario.revrse.contorls;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.mario.revrse.MyGdxGame;
 import com.mygdx.game.mario.revrse.assets.Assets;
@@ -11,13 +13,20 @@ public class GameButtons {
 	
 	public static void draw()
 	{
-		TextureRegion sprite = new TextureRegion(Assets.arrows,0,0 ,buttonSize, buttonSize );
-		//Assets.batch.draw(sprite, 0, 0, buttonSize*MyGdxGame.resolutionScaleX, buttonSize*MyGdxGame.resolutionScaleY);
-		sprite = new TextureRegion(Assets.arrows,buttonSize, 0 ,buttonSize, buttonSize );
-		//Assets.batch.draw(sprite, buttonSize*MyGdxGame.resolutionScaleX, 0, 
+			
+		TextureRegion textureReg = new TextureRegion(Assets.arrows,0,0 ,buttonSize, buttonSize );
+		Sprite sprite = new Sprite(textureReg);
+		sprite.setSize(1,1);
+		sprite.setPosition(0,0);
+		
+		//Assets.batch.draw(textureReg, 0, 0, buttonSize*MyGdxGame.resolutionScaleX, buttonSize*MyGdxGame.resolutionScaleY);
+		sprite.draw(Assets.batch);
+		//textureReg = new TextureRegion(Assets.arrows,buttonSize, 0 ,buttonSize, buttonSize );
+		//Assets.batch.draw(textureReg, buttonSize*MyGdxGame.resolutionScaleX, 0, 
 		//		buttonSize*MyGdxGame.resolutionScaleX, buttonSize*MyGdxGame.resolutionScaleY);
-	
+
 	}
+	
 	
 	public static boolean isTouched()
 	{
