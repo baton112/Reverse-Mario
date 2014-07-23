@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
@@ -36,27 +37,30 @@ public class GameScreen extends MyScreen {
 	
 	private final int  velocityIterations = 8, positionIterations = 3;
 	
-	//private final float pixelsToMeters 
+	private final float pixelsToMeters = 20;
 	
 
 	public GameScreen(MyGdxGame myGdxGame) {
 		this.game = myGdxGame;
-		// TODO Auto-generated constructor stub
-		myShapeRenderer = new ShapeRenderer();
-		player = new Player();
+		camera = new OrthographicCamera(Gdx.graphics.getWidth() / pixelsToMeters , 
+										Gdx.graphics.getHeight() /pixelsToMeters );  
 		gravity = new Vector2(0.0f, -9.81f);
 		world = new World(gravity, true);
 		debugRenderer = new Box2DDebugRenderer();
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());  
-		/// podzielic na skale zeby bylo wieksze 
 		
+		
+		myShapeRenderer = new ShapeRenderer(); // takie gowno tylko na chwile 
+		player = new Player();
+		
+		//kwadrat 
 		//definicja ciala 
 		BodyDef playerDef = new BodyDef();
 		playerDef.type = BodyType.DynamicBody;
-		playerDef.position.set(0,1);
+		playerDef.position.set(0,10);
+		
 		
 		PolygonShape kwadrat = new PolygonShape();
-		kwadrat.setAsBox(10, 10);
+		kwadrat.setAsBox(1, 1); /// polowa wielkosci 
 		
 		//fixture deinition 
 		FixtureDef fixtureDef = new FixtureDef();
@@ -68,6 +72,27 @@ public class GameScreen extends MyScreen {
 		world.createBody(playerDef).createFixture(fixtureDef);
 		
 		kwadrat.dispose();
+		
+		//GROUND 
+		//body def 
+		BodyDef groundDef = new BodyDef();
+		groundDef.type = BodyType.StaticBody;
+		groundDef.position.set(0,0);
+		
+		//ground shape 
+		ChainShape groundShape = new ChainShape();
+		groundShape.createChain(new Vector2[]{new Vector2(-500, 0), new Vector2(500, 0)});
+		
+		//fixture definition 
+		FixtureDef fixtureDefGround = new FixtureDef();
+		fixtureDefGround.shape = groundShape;
+		fixtureDefGround.friction = 0.5f;
+		fixtureDefGround.restitution = 0;//odbijanie 
+		
+		world.createBody(groundDef).createFixture(fixtureDefGround);
+		
+		groundShape.dispose();
+		
 	}
 	
 	@Override
@@ -107,6 +132,7 @@ public class GameScreen extends MyScreen {
 	public void dispose() {
 		world.dispose();
 		debugRenderer.dispose();
+	
 	}
 
 }
